@@ -3,6 +3,8 @@ Ejabberd için MongoDB sürücüsü
 
 #### Emongo'nun amacı, stabil olması ve kullanım açısından çok kolay olmasıdır.
 
+Emongo'nun orjinalini [5HT](https://github.com/5HT/emongo) geliştirmiştir. Bu repo ile Readme'sini türkçeye çevirerek, türk kullanıcılarına hitap, soru ve isteklerini cevaplamak amaçlanmıştır.
+
 ## Derleme ve Yükleme
 
 	make
