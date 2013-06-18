@@ -1,22 +1,22 @@
 # Emongo
-MongoDB driver for ejabberd.
+Ejabberd için MongoDB sürücüsü
 
-#### The goal of emongo is to be stable, fast and easy to use.
+#### Emongo'nun amacı, stabil olması ve kullanım açısından çok kolay olmasıdır.
 
-## Compile and install
+## Derleme ve Yükleme
 
 	make
 	sudo make install
 
-## Start emongo
+## emongo'yu başlat
 
 	application:start(emongo).
 
-## Connecting to mongodb
+## mongodb ile bağlantı
 
-#### Option 1 - Config file
+#### Seçenek 1 - Ayar dosyası
 
-example.config:
+ornek.config:
 
 	[{emongo, [
 		{pools, [
@@ -29,22 +29,22 @@ example.config:
 		]}
 	]}].
 
-specify the config file path when starting Erlang
+erlang ı başlatırken ayar dosyanızın yerini belirtin
 
 	erl -config priv/example
 
-start the application
+uygulamayı başlatın
 
 	application:start(emongo).
 
-#### Option 2 - Add pool
+#### Seçenek 2 - Havuz ekleyin
 
-start the app and then add as many pools as you like
+uygulamayı başlatın ve dilediğiniz kadar havuz ekleyin
 
 	application:start(emongo).
 	emongo:add_pool(pool1, "localhost", 27017, "testdatabase", 1).
 
-## API Type Reference
+## API Kullanım Referansları
 
 __PoolName__ = atom()  
 __Host__ = string()  
@@ -58,11 +58,11 @@ __Key__ = string() | atom() | binary() | integer()
 __Val__ = float() | string() | binary() | Document | {array, [term()]} | {binary, BinSubType, binary()} | {oid, binary()} | {oid, string()} | bool() | now() | datetime() | undefined | {regexp, string(), string()} | integer()  
 __BinSubType__ = integer() <http://www.mongodb.org/display/DOCS/BSON#BSON-noteondatabinary>
 
-## Add Pool
+## Havuz Ekle
 
 	emongo:add_pool(PoolName, Host, Port, Database, PoolSize) -> ok
 
-## Insert
+## Ekle
 
 __PoolName__ = atom()  
 __CollectionName__ = string()  
@@ -72,7 +72,7 @@ __Documents__ = [Document]
 	emongo:insert(PoolName, CollectionName, Document) -> ok
 	emongo:insert(PoolName, CollectionName, Documents) -> ok
 
-### Examples
+### Örnekler
 
 	%% insert a single document with two fields into the "collection" collection
 	emongo:insert(test, "collection", [{"field1", "value1"}, {"field2", "value2"}]).
@@ -80,7 +80,7 @@ __Documents__ = [Document]
 	%% insert two documents, each with a single field into the "collection" collection
 	emongo:insert(test, "collection", [[{"document1_field1", "value1"}], [{"document2_field1", "value1"}]]).
 
-## Update
+## Güncelle
 
 __PoolName__ = atom()  
 __CollectionName__ = string()  
@@ -94,12 +94,12 @@ __MultiUpdate__ = true | false (if all documents matching selector should be upd
 	emongo:update(PoolName, CollectionName, Selector, Document, Upsert) -> ok
 	emongo:update(PoolName, CollectionName, Selector, Document, Upsert, MultiUpdate) -> ok
 
-### Examples
+### Örnekler
 
 	%% update the document that matches "field1" == "value1"
 	emongo:update(test, "collection", [{"field1", "value1"}], [{"field1", "value1"}, {"field2", "value2"}]).
 
-## Delete
+## Sil
 
 __PoolName__ = atom()  
 __CollectionName__ = string()  
@@ -111,7 +111,7 @@ __Selector__ = Document
 	%% delete all documents in a collection that match a selector
 	emongo:delete(PoolName, CollectionName, Selector) -> ok
 
-## Find
+## Bul
 
 __Options__ = {timeout, Timeout} | {limit, Limit} | {offset, Offset} | {orderby, Orderby} | {fields, Fields} | response_options  
 __Timeout__ = integer (timeout in milliseconds)  
@@ -127,7 +127,7 @@ __Result__ = [Document] | response()
 	emongo:find_all(PoolName, CollectionName, Selector) -> Result
 	emongo:find_all(PoolName, CollectionName, Selector, Options) -> Result
 
-### Examples
+### Örnekler
 
 __limit, offset, timeout, orderby, fields__
 
@@ -206,7 +206,7 @@ __nested queries__
 
 ## Tests
 
-Ensure you have [etap](https://github.com/ngerakines/etap).
+[etap](https://github.com/ngerakines/etap) 'a sahip olduğunuzdan emin olun.
 
     git clone https://github.com/ngerakines/etap.git
     cd etap && make && cd ..
